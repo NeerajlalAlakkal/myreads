@@ -23,7 +23,7 @@ export default function BookComponent({updateBooks, bookShelf, books}) {
                 ></div>
                 <div className="book-shelf-changer">
                 <select onChange={ (e) => updateBooks(book, e.target.value)}>
-                    <option value="none" disabled>
+                    <option value="none" disabled selected>
                     Move to...
                     </option>
                     <option value="currentlyReading">
