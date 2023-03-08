@@ -1,8 +1,5 @@
 import "./App.css";
 import { useEffect, useState } from "react";
-import CurrentlyReadingComponent from "./components/CurrentlyReadingComponent";
-import WantToRead from "./components/WantToReadComponent";
-import Read from "./components/ReadComponent";
 import { getAll, update } from "./BooksAPI";
 import BookComponent from "./components/Book/BookComponent";
 import SearchBook from "./components/SearchBook";
