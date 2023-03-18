@@ -8,7 +8,6 @@ export default function SearchBook({ updateBooks, setShowSearchpage, showSearchP
   const [formattedSearchResult, setformattedSearchResult] = useState("");
 
   useEffect(() => {    
-      console.log(searchResult)
       let formSearcList  = searchResult.map((searchBook) => {
 
         //Changing the shelf value of search result book

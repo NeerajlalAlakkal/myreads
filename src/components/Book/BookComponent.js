@@ -1,6 +1,5 @@
 import React from 'react';
 import Book from "./Book"
-
 export default function BookComponent({updateBooks, bookShelfName, books}) {
   let booksToRender = (!books)? '': books.map(book => <Book key={book.id} book={book} updateBooks={updateBooks}/>)
   return (
