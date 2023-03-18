@@ -6,33 +6,29 @@ import SearchBook from "./components/SearchBook";
 
 function App() {
   const [showSearchPage, setShowSearchpage] = useState(false);
-  const [allBooks, setAllBooks] = useState([]);
+  const [allBooks, setAllBooks] = useState(false);
   const [currentlyReading, seCurrentlyReading] = useState([]);
   const [read, setRead] = useState([]);
   const [wantToRead, setWantToRead] = useState([]);
 
   const loadUserList = async () => {
     try {
-      const allB = await getAll();
-      setAllBooks(allB);
+      const allBooks = await getAll(); 
+      console.log(allBooks) // 12[{}, {}, ....]
+      setAllBooks(allBooks);
+      seCurrentlyReading(allBooks.filter((book) => book.shelf === "currentlyReading"));
+      setRead(allBooks.filter((book) => book.shelf === "read"));
+      setWantToRead(allBooks.filter((book) => book.shelf === "wantToRead"));
+   
     } catch (error) {
       // handle any error state, rejected promises, etc..
     }
   };
 
-  useEffect(() => {
+  useEffect(() => { 
     loadUserList();
   }, []);
 
-  useEffect(() => {
-    if (allBooks) {
-      seCurrentlyReading(
-        allBooks.filter((book) => book.shelf === "currentlyReading")
-      );
-      setRead(allBooks.filter((book) => book.shelf === "read"));
-      setWantToRead(allBooks.filter((book) => book.shelf === "wantToRead"));
-    }
-  }, [allBooks]);
 
   const updateBooks = (book, shelf) => {
     console.log("updateBooks", book);
@@ -49,6 +45,7 @@ function App() {
           updateBooks={updateBooks}
           showSearchPage={showSearchPage}
           setShowSearchpage={setShowSearchpage}
+          allBooks = {allBooks}
         />
       ) : (
         <div className="list-books">
@@ -58,19 +55,19 @@ function App() {
           <div className="list-books-content">
             <div>
               <BookComponent
-                bookShelf="currentlyReading"
+                bookShelfName="Currently Reading"
                 updateBooks={updateBooks}
                 books={currentlyReading}
-              />
+              />             
               <BookComponent
-                bookShelf="read"
-                updateBooks={updateBooks}
-                books={read}
-              />
-              <BookComponent
-                bookShelf="wantToRead"
+                bookShelfName="Want to read"
                 updateBooks={updateBooks}
                 books={wantToRead}
+              />
+               <BookComponent
+                bookShelfName="Read"
+                updateBooks={updateBooks}
+                books={read}
               />
             </div>
           </div>
